@@ -1,19 +1,14 @@
 package ios.tc;
 
 import ios.po.BasePage;
-import base.AppFactory;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
-import java.net.MalformedURLException;
 
 public class Verify_ActionSheet {
 
-    @BeforeTest()
+    /*@BeforeTest
     public void Setup() throws MalformedURLException {
         AppFactory.iOS_LaunchApp();
-    }
+    }*/
 
     @Test
     public void Test_Verify_ActionSheet() throws InterruptedException {
@@ -23,9 +18,12 @@ public class Verify_ActionSheet {
         Thread.sleep(2000);
     }
 
-    @AfterTest
+    /*@AfterTest
     public void tearDown(){
         AppFactory.closeApp();
-    }
+    }*/
 
+    public static class ScrollDown {
+
+    }
 }

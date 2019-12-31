@@ -12,10 +12,10 @@ import java.net.MalformedURLException;
 
 public class Verify_SaveContact {
 
-    @BeforeTest
+    /*@BeforeTest
     public void Setup() throws MalformedURLException {
         AppFactory.Android_LaunchApp();
-    }
+    }*/
 
     @Test
     public void Test_SaveContact() throws InterruptedException {
@@ -24,9 +24,9 @@ public class Verify_SaveContact {
         Thread.sleep(2000);
     }
 
-    @AfterTest
+    /*@AfterTest
     public void tearDown(){
         AppFactory.closeApp();
-    }
+    }*/
 
 }
