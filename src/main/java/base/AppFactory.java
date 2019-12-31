@@ -4,6 +4,8 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.service.local.AppiumDriverLocalService;
+import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import javax.management.Descriptor;
@@ -35,6 +37,7 @@ public class AppFactory {
         cap.setCapability("deviceName", "iPhone 11 Pro Max");
         cap.setCapability("automationName", "XCUITest");
         cap.setCapability("platformVersion", "13.3");
+        cap.setCapability("usePrebuiltWDA", true);
         //cap.setCapability("bundleId", "com.SamadiPour.SimpleCalculator");
         cap.setCapability("bundleId", "com.example.apple-samplecode.UICatalog");
         driver = new IOSDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), cap);
@@ -47,3 +50,43 @@ public class AppFactory {
     }
 
 }
+
+
+
+
+
+
+
+
+/*
+    static AppiumDriverLocalService service;
+
+    public static void main(String []args){
+        System.setProperty(AppiumServiceBuilder.NODE_PATH , "/usr/local/bin/node");
+        System.setProperty(AppiumServiceBuilder.APPIUM_PATH , "/usr/local/lib/node_modules/appium/build/lib/main.js");
+        //service = AppiumDriverLocalService.buildDefaultService();
+        //service.start();
+
+        service = new AppiumServiceBuilder().usingPort(4723).build();
+        service.start();
+        System.out.println(service.getUrl());
+    }
+
+    or
+
+    public static void start() {
+		AppiumServiceBuilder builder = new AppiumServiceBuilder();
+		builder
+        .withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"))
+        .usingDriverExecutable(new File("/usr/local/bin/node"))
+        .withIPAddress("127.0.0.1").usingPort(4723)
+        .withLogFile(new File("AppiumLogFile.txt"));
+
+		if(service == null) {
+			service = builder.build();
+			service.start();
+		}
+
+		 System.out.println("Appium server started at - " + service.getUrl().toString());
+	}
+ */
