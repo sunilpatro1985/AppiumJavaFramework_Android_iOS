@@ -7,8 +7,6 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
-import javax.management.Descriptor;
 import java.net.MalformedURLException;
 import java.net.URL;
 

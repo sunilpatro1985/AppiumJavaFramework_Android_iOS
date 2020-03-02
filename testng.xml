@@ -8,13 +8,14 @@
     <test name="Android">
         <parameter name="platform" value="android"/>
         <classes>
-            <class name="android.tc.Verify_SaveContact" />
+            <!--class name="android.tc.Verify_SaveContact" /-->
+            <class name="android.tc.PerformScroll" />
         </classes>
     </test>
     <test name="iOS">
         <parameter name="platform" value="ios"/>
         <classes>
-            <class name="ios.tc.Verify_ActionSheet" />
+            <!--class name="ios.tc.Verify_ActionSheet" /-->
         </classes>
     </test>
 </suite>
