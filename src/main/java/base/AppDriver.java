@@ -10,7 +10,8 @@ public class AppDriver {
         return driver.get();
     }
 
-    static void setDriver(WebDriver Driver){
+    public static void setDriver(WebDriver Driver){
         driver.set(Driver);
+        System.out.println("Driver is set");
     }
 }

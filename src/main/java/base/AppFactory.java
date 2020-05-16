@@ -40,7 +40,6 @@ public class AppFactory {
         cap.setCapability("bundleId", "com.example.apple-samplecode.UICatalog");
         driver = new IOSDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), cap);
         AppDriver.setDriver(driver);
-
     }
 
     public static void closeApp(){
