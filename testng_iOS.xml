@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" >
+    <listeners>
+        <listener class-name="base.TestListener"/>
+    </listeners>
+
+    <test name="iOS">
+        <parameter name="platform" value="ios"/>
+        <classes>
+            <class name="ios.tc.verify_iOS_SaveContact" />
+        </classes>
+    </test>
+</suite>

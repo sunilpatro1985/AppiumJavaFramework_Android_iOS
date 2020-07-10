@@ -1,6 +1,7 @@
 package android.tc;
 
 import android.po.BasePage;
+import android.po.ContactsPage;
 import base.AppDriver;
 import base.Util;
 import io.appium.java_client.android.AndroidDriver;
@@ -19,9 +20,12 @@ public class Verify_SaveContact {
     }*/
 
     @Test
-    public void Test_SaveContact() throws InterruptedException {
-        BasePage basePage = new BasePage();
+    public void Test_SaveContact_Android() throws InterruptedException {
+        /*BasePage basePage = new BasePage();
         basePage.save_Contact();
+        Thread.sleep(2000);*/
+        ContactsPage contactsPage = new ContactsPage();
+        contactsPage.saveContact();
         Thread.sleep(2000);
     }
 

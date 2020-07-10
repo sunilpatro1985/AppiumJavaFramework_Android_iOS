@@ -22,6 +22,8 @@ import java.util.List;
 
 public class BasePage {
 
+    //this section is intentionally commented, so we can see how to detect and perform actions with By locators
+
     public BasePage(){
         PageFactory.initElements(new AppiumFieldDecorator(AppDriver.getDriver()), this);
     }

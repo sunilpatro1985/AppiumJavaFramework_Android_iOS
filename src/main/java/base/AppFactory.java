@@ -24,6 +24,8 @@ public class AppFactory {
         //cap.setCapability("appActivity", ".Calculator");
         cap.setCapability("appPackage", "com.google.android.dialer");
         cap.setCapability("appActivity", ".DialtactsActivity");
+        //cap.setCapability("appPackage", "com.example.hello_layouts");
+        //cap.setCapability("appActivity", ".MainActivity");
         driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), cap);
 
         AppDriver.setDriver(driver);
@@ -32,12 +34,13 @@ public class AppFactory {
     public static void iOS_LaunchApp() throws MalformedURLException {
         cap = new DesiredCapabilities();
         cap.setCapability("platformName", "iOS");
-        cap.setCapability("deviceName", "iPhone 11 Pro Max");
+        cap.setCapability("deviceName", "iPhone 11");
         cap.setCapability("automationName", "XCUITest");
-        cap.setCapability("platformVersion", "13.3");
+        cap.setCapability("platformVersion", "13.5");
         cap.setCapability("usePrebuiltWDA", true);
         //cap.setCapability("bundleId", "com.SamadiPour.SimpleCalculator");
-        cap.setCapability("bundleId", "com.example.apple-samplecode.UICatalog");
+        //cap.setCapability("bundleId", "com.example.apple-samplecode.UICatalog");
+        cap.setCapability("bundleId", "com.apple.MobileAddressBook");
         driver = new IOSDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), cap);
         AppDriver.setDriver(driver);
     }

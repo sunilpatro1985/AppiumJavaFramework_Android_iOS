@@ -10,6 +10,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.awt.*;
 import java.time.Duration;
@@ -63,4 +65,18 @@ public class Util {
         ((AndroidDriver<MobileElement>) AppDriver.getDriver()).findElementByAndroidUIAutomator(
                 "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"" + Text + "\").instance(0))").click();
     }
+
+    public static void click(By byEl){
+        new WebDriverWait(AppDriver.getDriver(), 20).until(ExpectedConditions.presenceOfElementLocated(byEl)).click();
+    }
+
+    public static void sendKeys(By byEl, String text){
+        waitForEl(byEl);
+        AppDriver.getDriver().findElement(byEl).sendKeys(text);
+    }
+
+    public static void waitForEl(By byEl){
+        new WebDriverWait(AppDriver.getDriver(), 20).until(ExpectedConditions.presenceOfElementLocated(byEl));
+    }
+
 }
