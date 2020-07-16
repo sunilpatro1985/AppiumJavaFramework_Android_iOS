@@ -37,7 +37,7 @@ public class AppFactory {
         cap.setCapability("deviceName", "iPhone 11");
         cap.setCapability("automationName", "XCUITest");
         cap.setCapability("platformVersion", "13.5");
-        cap.setCapability("usePrebuiltWDA", true);
+        //cap.setCapability("usePrebuiltWDA", true);
         //cap.setCapability("bundleId", "com.SamadiPour.SimpleCalculator");
         //cap.setCapability("bundleId", "com.example.apple-samplecode.UICatalog");
         cap.setCapability("bundleId", "com.apple.MobileAddressBook");

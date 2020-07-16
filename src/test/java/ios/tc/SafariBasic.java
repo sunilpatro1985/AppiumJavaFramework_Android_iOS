@@ -22,12 +22,12 @@ public class SafariBasic {
     public static void main(String []args) throws MalformedURLException, InterruptedException, MalformedURLException {
         cap = new DesiredCapabilities();
         cap.setCapability("platformName", "iOS");
-        cap.setCapability("deviceName", "iPhone 11");
-        cap.setCapability("udid", "EF081044-A750-4C1E-A855-0AC8A576010B");
+        cap.setCapability("deviceName", "iPadSKP");
+        cap.setCapability("udid", "66619ce5871f27dd12dad90d195064a0abc4ebed");
         //cap.setCapability("xcodeOrgId", "XXXXXXXXX");
         //cap.setCapability("xcodeSigningId", "iPhone Developer");
-
-        cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, "13.5");
+        cap.setCapability("updatedWDABundleId", "com.qavbox.WebDriverAgentRunner");
+        cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, "13.5.1");
         cap.setCapability("automationName", "XCUITest");
         cap.setCapability("browserName", "safari");
         cap.setCapability("safariAllowPopups", true);

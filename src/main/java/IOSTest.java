@@ -16,9 +16,9 @@ public class IOSTest {
 
         cap = new DesiredCapabilities();
         cap.setCapability("platformName", "iOS");
-        cap.setCapability("deviceName", "iPhone 8");
+        cap.setCapability("deviceName", "iPhone 11");
         cap.setCapability("automationName", "XCUITest");
-        cap.setCapability("platformVersion", "13.0");
+        cap.setCapability("platformVersion", "13.5");
         //cap.setCapability("bundleId", "com.SamadiPour.SimpleCalculator");
         cap.setCapability("bundleId", "com.example.apple-samplecode.UICatalog");
 

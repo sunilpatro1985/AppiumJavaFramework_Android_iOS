@@ -10,6 +10,8 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
+        AppiumServer.Start();
+
         String Platform = result.getMethod().getXmlTest().getLocalParameters().get("platform");
 
         if(Platform.contains("android"))
