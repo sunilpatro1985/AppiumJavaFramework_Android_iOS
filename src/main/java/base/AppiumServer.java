@@ -14,6 +14,8 @@ import java.util.HashMap;
 
 public class AppiumServer {
 
+    static AppiumDriverLocalService server;
+
     public static void Start(){
         if(isPortAvailable(4723)){
             getInstance().start();
@@ -23,7 +25,14 @@ public class AppiumServer {
     }
 
     static AppiumDriverLocalService getInstance(){
-        AppiumDriverLocalService server;
+        if(server == null){
+            setInstance();
+            server.clearOutPutStreams(); //stop printing appium logs to console
+        }
+        return server;
+    }
+
+    static void setInstance(){
         HashMap<String, String> environment = new HashMap();
         //path to carthage
         environment.put("PATH", "/usr/local/bin:" + System.getenv("PATH"));
@@ -36,12 +45,11 @@ public class AppiumServer {
                 //.withIPAddress("127.0.0.1")
                 .usingPort(4723)
                 .withEnvironment(environment)
-                //.withArgument(GeneralServerFlag.LOG_LEVEL, "warn")
+                .withArgument(GeneralServerFlag.LOCAL_TIMEZONE)
+                //.withArgument(GeneralServerFlag.LOG_LEVEL, "WARN")
                 .withLogFile(new File("AppiumLog.txt"));
 
         server = AppiumDriverLocalService.buildService(builder);
-        server.clearOutPutStreams(); //stop printing appium logs to console
-        return server;
     }
 
     /*boolean checkIfServerIsRunning(int port) {
@@ -74,8 +82,11 @@ public class AppiumServer {
 
 
     static void Stop(){
-        //getInstance().stop();
-        Runtime runtime = Runtime.getRuntime();
+        if(server != null){
+            getInstance().stop();
+            System.out.println("Appium server stopped!");
+        }
+        /*Runtime runtime = Runtime.getRuntime();
         try {
             //runtime.exec("taskkill /F /IM node");
             String[] command={"/usr/bin/killall", "-9", "node" };
@@ -84,7 +95,7 @@ public class AppiumServer {
             System.out.println("Server stopped!");
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
 

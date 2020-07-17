@@ -68,5 +68,6 @@ public class TestListener implements ITestListener {
 
     public void tearDown(){
         AppDriver.getDriver().quit();
+        AppiumServer.Stop();
     }
 }
