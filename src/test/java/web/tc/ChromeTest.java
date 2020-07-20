@@ -1,4 +1,4 @@
-package android.tc;
+package web.tc;
 
 import base.AppDriver;
 import base.Util;

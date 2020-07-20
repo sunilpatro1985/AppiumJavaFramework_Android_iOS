@@ -1,4 +1,4 @@
-package ios.tc;
+package web.tc;
 
 import base.AppDriver;
 import io.appium.java_client.MobileElement;

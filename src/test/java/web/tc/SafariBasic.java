@@ -1,4 +1,4 @@
-package ios.tc;
+package web.tc;
 
 import base.AppDriver;
 import base.Util;
@@ -23,7 +23,7 @@ public class SafariBasic {
         cap = new DesiredCapabilities();
         cap.setCapability("platformName", "iOS");
         cap.setCapability("deviceName", "iPadSKP");
-        cap.setCapability("udid", "66619ce5871f27dd12dad90d195064a0abc4ebed");
+        cap.setCapability("udid", "XXXXXXX");
         //cap.setCapability("xcodeOrgId", "XXXXXXXXX");
         //cap.setCapability("xcodeSigningId", "iPhone Developer");
         cap.setCapability("updatedWDABundleId", "com.qavbox.WebDriverAgentRunner");
