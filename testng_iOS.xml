@@ -8,7 +8,8 @@
     <test name="iOS">
         <parameter name="platform" value="ios"/>
         <classes>
-            <class name="ios.tc.verify_iOS_SaveContact" />
+            <!--class name="ios.tc.verify_iOS_SaveContact" /-->
+            <class name="findBy.tc.SampleTest" />
         </classes>
     </test>
 </suite>

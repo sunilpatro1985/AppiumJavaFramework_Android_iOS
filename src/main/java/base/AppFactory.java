@@ -22,13 +22,17 @@ public class AppFactory {
         cap.setCapability("automationName", "UiAutomator2");
         //cap.setCapability("appPackage", "com.android.calculator2");
         //cap.setCapability("appActivity", ".Calculator");
-        cap.setCapability("appPackage", "com.google.android.dialer");
-        cap.setCapability("appActivity", ".DialtactsActivity");
+        //cap.setCapability("appPackage", "com.google.android.dialer");
+        //cap.setCapability("appActivity", ".DialtactsActivity");
         //cap.setCapability("appPackage", "com.example.hello_layouts");
         //cap.setCapability("appActivity", ".MainActivity");
+        cap.setCapability("appPackage", "io.cloudgrey.the_app");
+        cap.setCapability("appActivity", ".MainActivity");
         driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), cap);
 
         AppDriver.setDriver(driver);
+        System.out.println("Android driver is set");
+
     }
 
     public static void iOS_LaunchApp() throws MalformedURLException {
@@ -40,9 +44,12 @@ public class AppFactory {
         //cap.setCapability("usePrebuiltWDA", true);
         //cap.setCapability("bundleId", "com.SamadiPour.SimpleCalculator");
         //cap.setCapability("bundleId", "com.example.apple-samplecode.UICatalog");
-        cap.setCapability("bundleId", "com.apple.MobileAddressBook");
+        //cap.setCapability("bundleId", "com.apple.MobileAddressBook");
+        cap.setCapability("bundleId", "io.cloudgrey.the-app");
         driver = new IOSDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), cap);
         AppDriver.setDriver(driver);
+        System.out.println("iOS driver is set");
+
     }
 
     public static void closeApp(){

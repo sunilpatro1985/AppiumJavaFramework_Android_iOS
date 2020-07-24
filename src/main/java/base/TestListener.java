@@ -33,17 +33,29 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        tearDown();
+        try {
+            tearDown();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        tearDown();
+        try {
+            tearDown();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        tearDown();
+        try {
+            tearDown();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -66,8 +78,9 @@ public class TestListener implements ITestListener {
 
     }
 
-    public void tearDown(){
+    public void tearDown() throws InterruptedException {
         AppDriver.getDriver().quit();
         AppiumServer.Stop();
+        Thread.sleep(3000);
     }
 }
