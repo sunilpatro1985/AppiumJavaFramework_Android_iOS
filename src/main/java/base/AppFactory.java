@@ -22,8 +22,8 @@ public class AppFactory {
         cap.setCapability("automationName", "UiAutomator2");
         //cap.setCapability("appPackage", "com.android.calculator2");
         //cap.setCapability("appActivity", ".Calculator");
-        //cap.setCapability("appPackage", "com.google.android.dialer");
-        //cap.setCapability("appActivity", ".DialtactsActivity");
+        //cap.setCapability("appPackage", "com.android.dialer");
+        //cap.setCapability("appActivity", ".app.DialtactsActivity");
         //cap.setCapability("appPackage", "com.example.hello_layouts");
         //cap.setCapability("appActivity", ".MainActivity");
         cap.setCapability("appPackage", "io.cloudgrey.the_app");
