@@ -1,7 +1,6 @@
 package base;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
@@ -12,7 +11,7 @@ import java.net.URL;
 
 public class AppFactory {
 
-    public static AppiumDriver<MobileElement> driver;
+    public static AppiumDriver driver;
     public static DesiredCapabilities cap;
 
     public static void Android_LaunchApp() throws MalformedURLException {
@@ -28,7 +27,7 @@ public class AppFactory {
         //cap.setCapability("appActivity", ".MainActivity");
         cap.setCapability("appPackage", "io.cloudgrey.the_app");
         cap.setCapability("appActivity", ".MainActivity");
-        driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), cap);
+        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), cap);
 
         AppDriver.setDriver(driver);
         System.out.println("Android driver is set");
@@ -46,7 +45,7 @@ public class AppFactory {
         //cap.setCapability("bundleId", "com.example.apple-samplecode.UICatalog");
         //cap.setCapability("bundleId", "com.apple.MobileAddressBook");
         cap.setCapability("bundleId", "io.cloudgrey.the-app");
-        driver = new IOSDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), cap);
+        driver = new IOSDriver(new URL("http://127.0.0.1:4723/wd/hub"), cap);
         AppDriver.setDriver(driver);
         System.out.println("iOS driver is set");
 

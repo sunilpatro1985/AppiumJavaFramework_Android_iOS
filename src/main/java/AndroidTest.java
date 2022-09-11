@@ -1,8 +1,8 @@
 import base.AppDriver;
 import base.Util;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -15,7 +15,7 @@ import java.util.List;
 
 public class AndroidTest {
 
-    public static AppiumDriver<MobileElement> driver;
+    public static AppiumDriver driver;
     public static DesiredCapabilities cap;
 
     public static void main(String[] args) throws InterruptedException, MalformedURLException {
@@ -31,13 +31,16 @@ public class AndroidTest {
         cap.setCapability("appPackage", "com.swaglabsmobileapp");
         cap.setCapability("appActivity", ".MainActivity");
 
-        driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), cap);
+        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), cap);
+
+
+
         AppDriver.setDriver(driver);
         Thread.sleep(1000);
 
-        driver.findElement(MobileBy.AccessibilityId("test-Username")).sendKeys("standard_user");
-        driver.findElement(MobileBy.AccessibilityId("test-Password")).sendKeys("secret_sauce");
-        driver.findElement(MobileBy.AccessibilityId("test-LOGIN")).click();
+        driver.findElement(AppiumBy.accessibilityId("test-Username")).sendKeys("standard_user");
+        driver.findElement(AppiumBy.accessibilityId("test-Password")).sendKeys("secret_sauce");
+        driver.findElement(AppiumBy.accessibilityId("test-LOGIN")).click();
 
         /*driver.findElement(By.xpath("//android.widget.ImageView[@content-desc='Contacts tab.']")).click();
         Thread.sleep(500);

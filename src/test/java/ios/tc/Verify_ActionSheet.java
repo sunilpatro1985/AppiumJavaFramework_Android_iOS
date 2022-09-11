@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
+
 public class Verify_ActionSheet {
 
     /*@BeforeTest
@@ -28,10 +30,10 @@ public class Verify_ActionSheet {
     @Test
     public void pickerWheelTest() throws InterruptedException {
         Thread.sleep(3000);
-        new WebDriverWait(AppDriver.getDriver(), 30)
+        new WebDriverWait(AppDriver.getDriver(), Duration.ofSeconds(20))
                 .until(ExpectedConditions.presenceOfElementLocated(By.id("AAPLPickerViewController"))).click();
         //pickerWheel.PickerWheelItem.click();
-        System.out.println(new WebDriverWait(AppDriver.getDriver(), 30)
+        System.out.println(new WebDriverWait(AppDriver.getDriver(), Duration.ofSeconds(20))
                 .until(ExpectedConditions.presenceOfElementLocated(By.id("Red color component value"))).getAttribute("value"));
     }
 

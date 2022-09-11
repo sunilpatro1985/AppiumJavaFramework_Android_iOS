@@ -1,7 +1,6 @@
 package web.tc;
 
 import base.AppDriver;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.By;
@@ -16,7 +15,7 @@ import java.util.Set;
 public class SafariTest {
 
     static DesiredCapabilities cap;
-    static IOSDriver<MobileElement> driver;
+    static IOSDriver driver;
 
     public static void main(String []args) throws MalformedURLException, InterruptedException, MalformedURLException {
         cap = new DesiredCapabilities();
@@ -27,7 +26,7 @@ public class SafariTest {
         cap.setCapability("browserName", "safari");
         cap.setCapability("safariAllowPopups", true);
 
-        driver = new IOSDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), cap);
+        driver = new IOSDriver(new URL("http://127.0.0.1:4723/wd/hub"), cap);
         AppDriver.setDriver(driver);
 
 

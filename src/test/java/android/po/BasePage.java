@@ -2,7 +2,6 @@ package android.po;
 
 import base.AppDriver;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -46,9 +45,9 @@ public class BasePage {
     public void save_Contact() throws InterruptedException {
         Thread.sleep(500);
         ContactTab.click();
-        new WebDriverWait(AppDriver.getDriver(), 20).until(ExpectedConditions.presenceOfElementLocated(by_createNewContact));
+        new WebDriverWait(AppDriver.getDriver(), Duration.ofSeconds(20)).until(ExpectedConditions.presenceOfElementLocated(by_createNewContact));
         AddContact.click();
-        new WebDriverWait(AppDriver.getDriver(), 20).until(ExpectedConditions.presenceOfElementLocated(by_FirstName));
+        new WebDriverWait(AppDriver.getDriver(), Duration.ofSeconds(20)).until(ExpectedConditions.presenceOfElementLocated(by_FirstName));
         FirstName.sendKeys("Welcome111");
         SaveBtn.click();
     }
