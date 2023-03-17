@@ -4,6 +4,7 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.options.UiAutomator2Options;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -20,7 +21,7 @@ public class AndroidTest {
 
     public static void main(String[] args) throws InterruptedException, MalformedURLException {
 
-        cap = new DesiredCapabilities();
+        /*cap = new DesiredCapabilities();
         cap.setCapability("platformName", "Android");
         cap.setCapability("deviceName", "emulator-5554");
         cap.setCapability("automationName", "UiAutomator2");
@@ -31,8 +32,18 @@ public class AndroidTest {
         cap.setCapability("appPackage", "com.swaglabsmobileapp");
         cap.setCapability("appActivity", ".MainActivity");
 
-        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), cap);
+        driver = new AndroidDriver(new URL("http://127.0.0.1:4723"), cap);*/
 
+        UiAutomator2Options options = new UiAutomator2Options();
+        options.setDeviceName("emulator-5554")
+                .setPlatformVersion("11.0")
+                .setAppPackage("com.saucelabs.mydemoapp.rn")
+                .setAppActivity(".MainActivity");
+
+        //.setApp("")
+        //.setNoReset(true) //not install the app if it's already insatlled
+
+        AppiumDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/"), options);
 
 
         AppDriver.setDriver(driver);

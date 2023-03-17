@@ -36,7 +36,7 @@ public class IOSTest {
 
         XCUITestOptions options = new XCUITestOptions()
                 .setDeviceName("iPhone SE (3rd generation)")
-                .setPlatformVersion("15.5")
+                .setPlatformVersion("16.2")
                 .setBundleId("com.saucelabs.mydemoapp.rn");
                 //.setApp(System.getProperty("user.dir") + "/VodQA.apk")
         driver = new IOSDriver(new URL("http://0.0.0.0:4723"), options);
