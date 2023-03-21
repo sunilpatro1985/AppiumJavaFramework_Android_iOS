@@ -2,7 +2,7 @@ package web.tc;
 
 import base.AppDriver;
 import base.Util;
-import io.appium.java_client.MobileElement;
+//import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import web.po.ChromePage;
@@ -12,7 +12,7 @@ import java.net.URL;
 public class ChromeTest {
 
     static DesiredCapabilities cap;
-    static AndroidDriver<MobileElement> driver;
+    static AndroidDriver driver;
 
     public static void main(String []args) throws MalformedURLException, InterruptedException, MalformedURLException {
         cap = new DesiredCapabilities();
@@ -25,7 +25,7 @@ public class ChromeTest {
 
         //appium --allow-insecure chromedriver_autodownload
 
-        driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), cap);
+        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), cap);
         AppDriver.setDriver(driver);
 
         driver.get("https://qavbox.github.io/demo/signup/");

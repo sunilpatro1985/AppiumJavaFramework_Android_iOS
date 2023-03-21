@@ -1,9 +1,11 @@
 package base;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
+//import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.ios.options.XCUITestOptions;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -12,11 +14,11 @@ import java.net.URL;
 
 public class AppFactory {
 
-    public static AppiumDriver<MobileElement> driver;
+    public static AppiumDriver driver;
     public static DesiredCapabilities cap;
 
     public static void Android_LaunchApp() throws MalformedURLException {
-        cap = new DesiredCapabilities();
+        /*cap = new DesiredCapabilities();
         cap.setCapability("platformName", "Android");
         cap.setCapability("deviceName", "emulator-5554");
         cap.setCapability("automationName", "UiAutomator2");
@@ -28,7 +30,19 @@ public class AppFactory {
         //cap.setCapability("appActivity", ".MainActivity");
         cap.setCapability("appPackage", "io.cloudgrey.the_app");
         cap.setCapability("appActivity", ".MainActivity");
-        driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), cap);
+        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), cap);*/
+
+
+        UiAutomator2Options options = new UiAutomator2Options();
+        options.setDeviceName("emulator-5554")
+                .setPlatformVersion("11.0")
+                .setAppPackage("io.cloudgrey.the_app")
+                .setAppActivity(".MainActivity");
+
+        //.setApp("")
+        //.setNoReset(true) //not install the app if it's already insatlled
+
+        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/"), options);
 
         AppDriver.setDriver(driver);
         System.out.println("Android driver is set");
@@ -36,7 +50,7 @@ public class AppFactory {
     }
 
     public static void iOS_LaunchApp() throws MalformedURLException {
-        cap = new DesiredCapabilities();
+        /*cap = new DesiredCapabilities();
         cap.setCapability("platformName", "iOS");
         cap.setCapability("deviceName", "iPhone 11");
         cap.setCapability("automationName", "XCUITest");
@@ -46,7 +60,14 @@ public class AppFactory {
         //cap.setCapability("bundleId", "com.example.apple-samplecode.UICatalog");
         //cap.setCapability("bundleId", "com.apple.MobileAddressBook");
         cap.setCapability("bundleId", "io.cloudgrey.the-app");
-        driver = new IOSDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), cap);
+        driver = new IOSDriver(new URL("http://127.0.0.1:4723/wd/hub"), cap);*/
+        XCUITestOptions options = new XCUITestOptions()
+                .setDeviceName("iPhone SE (3rd generation)")
+                .setPlatformVersion("16.2")
+                .setBundleId("io.cloudgrey.the-app");
+        //.setApp(System.getProperty("user.dir") + "/VodQA.apk")
+        driver = new IOSDriver(new URL("http://0.0.0.0:4723"), options);
+
         AppDriver.setDriver(driver);
         System.out.println("iOS driver is set");
 
