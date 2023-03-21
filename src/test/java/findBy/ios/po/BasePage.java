@@ -1,4 +1,4 @@
-package ios.po;
+package findBy.ios.po;
 
 import base.AppDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;

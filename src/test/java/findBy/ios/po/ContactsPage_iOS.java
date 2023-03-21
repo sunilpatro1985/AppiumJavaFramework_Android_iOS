@@ -1,4 +1,4 @@
-package ios.po;
+package findBy.ios.po;
 
 import base.Util;
 import org.openqa.selenium.By;

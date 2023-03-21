@@ -1,7 +1,6 @@
-package ios.tc;
+package findBy.ios.tc;
 
-import base.AppiumServer;
-import ios.po.ContactsPage_iOS;
+import findBy.ios.po.ContactsPage_iOS;
 import org.testng.annotations.Test;
 
 public class verify_iOS_SaveContact {

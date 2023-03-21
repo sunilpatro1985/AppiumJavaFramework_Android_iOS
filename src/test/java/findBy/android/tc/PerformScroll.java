@@ -1,7 +1,7 @@
-package android.tc;
+package findBy.android.tc;
 
-import android.po.BasePage;
-import android.po.ContactsPage;
+import findBy.android.po.BasePage;
+import findBy.android.po.ContactsPage;
 import base.Util;
 import org.testng.annotations.Test;
 

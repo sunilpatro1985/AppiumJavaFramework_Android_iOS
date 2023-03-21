@@ -1,8 +1,8 @@
-package ios.tc;
+package findBy.ios.tc;
 
 import base.AppDriver;
-import ios.po.BasePage;
-import ios.po.PickerWheel;
+import findBy.ios.po.BasePage;
+import findBy.ios.po.PickerWheel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;

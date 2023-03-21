@@ -1,9 +1,9 @@
-package android.tc;
+package findBy.android.tc;
 
-import android.po.BasePage;
-import android.po.ContactsPage;
+import findBy.android.po.BasePage;
 import base.AppDriver;
 import base.Util;
+import findBy.android.po.ContactsPage;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.Test;
