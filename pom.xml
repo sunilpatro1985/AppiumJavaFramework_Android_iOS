@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <suiteXmlFile>testng.xml</suiteXmlFile>
+        <!--suiteXmlFile>testng.xml</suiteXmlFile-->
     </properties>
 
     <dependencies>
@@ -40,11 +40,11 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.1.2</version>
-                <configuration>
+                <!--configuration>
                     <suiteXmlFiles>
                         <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
-                </configuration>
+                </configuration-->
             </plugin>
         </plugins>
     </build>
