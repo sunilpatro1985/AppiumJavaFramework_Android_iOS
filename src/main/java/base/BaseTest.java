@@ -2,8 +2,12 @@ package base;
 
 import driver.AppDriver;
 import driver.AppFactory;
+import org.testng.ITest;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.testng.annotations.BeforeMethod;
+
+import java.io.IOException;
 import java.net.MalformedURLException;
 
 public class BaseTest {
@@ -16,7 +20,10 @@ public class BaseTest {
     }
 
     @AfterMethod
-    public void closeApp() throws MalformedURLException {
+    public void closeApp(ITestResult result) throws IOException {
+        if(result.getStatus() == ITestResult.FAILURE){
+            Util.getScreenshot(result.getTestName());
+        }
         //AppDriver.getCurrentDriver().quit();
         //base.AppiumServer.stop();
     }
