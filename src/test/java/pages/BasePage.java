@@ -1,65 +1,119 @@
 package pages;
 
 import driver.AppDriver;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.remote.SupportsContextSwitching;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.FieldDecorator;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.List;
+import java.util.Set;
 
 public class BasePage {
-    //applicable for all browser, but takes screnshot only the visible portion of the browser
-    public static String getScreenshot(String imagename) throws IOException {
-        TakesScreenshot ts = (TakesScreenshot) AppDriver.getCurrentDriver();
-        File f = ts.getScreenshotAs(OutputType.FILE);
-        String filePath = "./screenshot/"+imagename+".jpg";
-        FileUtils.copyFile(f, new File(filePath));
-        return filePath;
+
+    BasePage() {
+        PageFactory.initElements(new AppiumFieldDecorator(AppDriver.getCurrentDriver()), this);
     }
 
-    public static String convertImg_Base64(String screenshotPath) throws IOException {
-           /*File f = new File(screenshotPath);
-            FileInputStream fis = new FileInputStream(f);
-            byte[] bytes = new byte[(int)f.length()];
-            fis.read(bytes);
-            String base64Img =
-                    new String(Base64.encodeBase64(bytes), StandardCharsets.UTF_8);
-            */
-        byte[] file = FileUtils.readFileToByteArray(new File(screenshotPath));
-        String base64Img = Base64.getEncoder().encodeToString(file);
-        return  base64Img;
+    WebDriverWait wait = new WebDriverWait(AppDriver.getCurrentDriver(), Duration.ofSeconds(10));
+
+    public void waitForEl(By byLocator){
+        wait.until(ExpectedConditions.presenceOfElementLocated(byLocator));
     }
 
-    public static void captureScreenShotOf(WebElement el, String fileName){
-        File newImg = el.getScreenshotAs(OutputType.FILE);
-        try{
-            FileUtils.copyFile(newImg, new File("./screenshot/"+fileName+".jpg"));
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+    public List<WebElement> getEls(By byLocator){
+        return AppDriver.getCurrentDriver()
+                .findElements(byLocator);
     }
 
-    public static void captureFullPageShot(String fileName){
-        File newImg = ((FirefoxDriver) AppDriver.getCurrentDriver()).getFullPageScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(newImg, new File("./screenshot/"+fileName+".jpg"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public WebElement getEl(By byLocator){
+        return AppDriver.getCurrentDriver()
+                .findElement(byLocator);
     }
 
-    public static void click(int x, int y){
-
+    public void click(By byLocator){
+        //waitForEl(byLocator);
+        getEl(byLocator).click();
+    }
+    public void waitNclick(By byLocator){
+        wait.until(ExpectedConditions.elementToBeClickable(byLocator)).click();
     }
 
-    public static void click(By locator){
-
+    public static void tap(int x, int y){
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        Sequence clickPosition = new Sequence(finger, 1);
+        clickPosition.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, y))
+                .addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()))
+                .addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+        ((AppiumDriver) AppDriver.getCurrentDriver()).perform(Arrays.asList(clickPosition));
     }
 
+    public void type(By byLocator, String text){
+        getEl(byLocator).sendKeys(text);
+    }
+
+    public int size(By byLocator){
+        return getEls(byLocator).size();
+    }
+
+    public String getText(By byLocator){
+        return getEl(byLocator).getText();
+    }
+
+    public String getValue(By byLocator){
+        return getEl(byLocator).getAttribute("value");
+    }
+
+    protected boolean isSelected(By byLocator) {
+        return getEl(byLocator).isSelected();
+    }
+
+
+    private Select getDropDownElement(By byLocator) {
+        return new Select(AppDriver.getCurrentDriver().findElement(byLocator));
+    }
+
+    public void selectDropDownByOption(By byLocator, String option){
+        getDropDownElement(byLocator).selectByVisibleText(option);
+    }
+
+    protected List<WebElement> getDropDownOptions(By byLocator) {
+        return getDropDownElement(byLocator).getOptions();
+    }
+
+    protected List<WebElement> getDropDownAllSelectedOptions(By byLocator) {
+        return getDropDownElement(byLocator).getAllSelectedOptions();
+    }
+
+    protected WebElement getDropDownSelectedOption(By byLocator) {
+        return getDropDownElement(byLocator).getFirstSelectedOption();
+    }
+
+    protected Set<String> getAppContexts(){
+        return ((SupportsContextSwitching) AppDriver.getCurrentDriver()).getContextHandles();
+    }
+    //AppiumDriver doesn't have the context method implemented, it's present in Android/IOS driver only
+
+    protected String getCurrentAppContext(){
+        return ((SupportsContextSwitching) AppDriver.getCurrentDriver()).getContext();
+    }
 
 }
