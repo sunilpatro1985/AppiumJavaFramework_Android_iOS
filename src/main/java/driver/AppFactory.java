@@ -18,7 +18,7 @@ public class AppFactory {
     private static void android_launchApp() throws MalformedURLException {
         UiAutomator2Options options = new UiAutomator2Options();
         options.setDeviceName("emulator-5554")
-                .setPlatformVersion("12.0")
+                .setPlatformVersion("13.0")
                 .setAppPackage("com.saucelabs.mydemoapp.rn")
                 .setAppActivity(".MainActivity");
 
