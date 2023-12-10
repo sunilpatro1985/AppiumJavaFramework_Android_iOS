@@ -35,8 +35,8 @@ public class BasePage {
 
     WebDriverWait wait = new WebDriverWait(AppDriver.getCurrentDriver(), Duration.ofSeconds(10));
 
-    public void waitForEl(By byLocator){
-        wait.until(ExpectedConditions.presenceOfElementLocated(byLocator));
+    public WebElement waitForEl(By byLocator){
+        return wait.until(ExpectedConditions.presenceOfElementLocated(byLocator));
     }
 
     public List<WebElement> getEls(By byLocator){
