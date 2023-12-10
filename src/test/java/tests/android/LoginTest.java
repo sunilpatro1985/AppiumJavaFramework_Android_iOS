@@ -10,6 +10,6 @@ public class LoginTest extends BaseTest {
     @Test
     public void loginTest() {
         LoginPage lp = new LoginPage();
-        lp.signIn("fwef", "werfe");
+        lp.signIn("bob@example.com", "10203040");
     }
 }

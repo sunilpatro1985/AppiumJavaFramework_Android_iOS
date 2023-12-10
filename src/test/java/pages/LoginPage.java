@@ -1,6 +1,10 @@
 package pages;
 
+import io.appium.java_client.AppiumBy;
+import io.appium.java_client.pagefactory.AndroidBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.iOSBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
@@ -8,13 +12,16 @@ import javax.xml.xpath.XPath;
 
 public class LoginPage extends BasePage{
 
-    @AndroidFindBy(accessibility = "user-name")
-    By userName;
+    @AndroidBy(accessibility = "Username input field")
+    //@iOSBy(accessibility = "user-name")
+    By userName = AppiumBy.accessibilityId("Username input field");
 
-    @AndroidFindBy(accessibility = "password")
+    @AndroidFindBy(accessibility = "Password input field")
+    @iOSXCUITFindBy(accessibility = "password")
     By password;
 
-    @AndroidFindBy(accessibility = "login-button")
+    @AndroidFindBy(accessibility = "Login button")
+    @iOSXCUITFindBy(accessibility = "login-button")
     By signIn;
 
     MenuPage mp = new MenuPage();

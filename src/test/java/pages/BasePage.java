@@ -66,6 +66,7 @@ public class BasePage {
         ((AppiumDriver) AppDriver.getCurrentDriver()).perform(Arrays.asList(clickPosition));
     }
 
+    //optional
     public void type(By byLocator, String text){
         getEl(byLocator).sendKeys(text);
     }
@@ -85,10 +86,13 @@ public class BasePage {
     protected boolean isSelected(By byLocator) {
         return getEl(byLocator).isSelected();
     }
-
+    //optional end - only needed when using by locator
 
     private Select getDropDownElement(By byLocator) {
         return new Select(AppDriver.getCurrentDriver().findElement(byLocator));
+    }
+    private Select getDropDownElement(WebElement el) {
+        return new Select(el);
     }
 
     public void selectDropDownByOption(By byLocator, String option){
@@ -105,6 +109,37 @@ public class BasePage {
 
     protected WebElement getDropDownSelectedOption(By byLocator) {
         return getDropDownElement(byLocator).getFirstSelectedOption();
+    }
+
+    protected boolean isDropDownItemscontain(WebElement element, String text){
+        boolean flag = false;
+        List<WebElement> els = getDropDownElement(element).getOptions();
+        for(WebElement el: els){
+            if(el.getText().contains(text)){
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
+
+    protected boolean isTextMatches(WebElement element, String text){
+        return element.getText().equalsIgnoreCase(text);
+    }
+
+    protected boolean isTextContains(WebElement element, String text){
+        return element.getText().contains(text);
+    }
+
+    protected boolean isListItemscontain(List<WebElement> items, String text){
+        boolean flag = false;
+        for(WebElement el: items){
+            if(el.getText().contains(text)){
+                flag = true;
+                break;
+            }
+        }
+        return flag;
     }
 
     protected Set<String> getAppContexts(){
