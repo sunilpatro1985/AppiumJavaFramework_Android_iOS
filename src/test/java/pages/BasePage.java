@@ -5,9 +5,9 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.SupportsContextSwitching;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Sleeper;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -15,20 +15,18 @@ import java.util.List;
 import java.util.Set;
 
 public class BasePage {
-
-
     WebDriverWait wait = new WebDriverWait(AppDriver.getCurrentDriver(), Duration.ofSeconds(30));
 
+    protected WebElement waitForEl(By byLocator){
+       return wait.until(ExpectedConditions.presenceOfElementLocated(byLocator));
+    }
+
     protected WebElement getEl(By byLocator){
-         return AppDriver.getCurrentDriver().findElement(byLocator);
+        return AppDriver.getCurrentDriver().findElement(byLocator);
     }
 
     protected List<WebElement> getEls(By byLocator){
         return AppDriver.getCurrentDriver().findElements(byLocator);
-    }
-
-    protected int size(By byLocator){
-        return getEls(byLocator).size();
     }
 
     protected void click(By byLocator){
@@ -39,50 +37,59 @@ public class BasePage {
         getEl(byLocator).sendKeys(text);
     }
 
-    protected void waitForEl(By byLocator){
-        wait.until(ExpectedConditions.presenceOfElementLocated(byLocator));
+    protected void waitNtype(By byLocator, String text){
+        waitForEl(byLocator).sendKeys(text);
     }
 
-    protected void waitNcLick(By byLocator){
-        wait.until(ExpectedConditions.elementToBeClickable(byLocator)).click();
-        //click();
+    protected void waitNclick(By byLocator){
+        waitForEl(byLocator).click();
+    }
+
+    protected int size(By byLocator){
+        return getEls(byLocator).size();
+    }
+
+    protected int size(List<WebElement> els){
+        return els.size();
     }
 
     protected String getText(By byLocator){
-        return getEl(byLocator).getText();
+        return waitForEl(byLocator).getText();
     }
 
-    protected String getValue(By byLocator){
-        return getEl(byLocator).getAttribute("value");
+    protected String getAttribute(By byLocator, String attr){
+        return waitForEl(byLocator).getAttribute(attr);
     }
 
-    protected boolean isTextMatches(By byLocator, String text){
-        return getEl(byLocator).getText().equalsIgnoreCase(text);
+    protected boolean isListItemsContain(List<WebElement> items, String text){
+        boolean flag = false;
+
+        for(WebElement el: items){
+            if(el.getText().contains(text)){
+                flag= true;
+                break;
+            }
+        }
+        return flag;
     }
 
-    protected boolean isTextContains(By byLocator, String text){
-        return getEl(byLocator).getText().contains(text);
+    protected boolean isTextMatches(WebElement el, String text){
+        return el.getText().equalsIgnoreCase(text);
+    }
+    protected boolean isTextContains(WebElement el, String text){
+        return el.getText().contains(text);
     }
 
-    protected boolean isSelected(By byLocator, String text){
-        return getEl(byLocator).isSelected();
-    }
+    /*
+    FindBy(id = "some")
+        private WebElement login;
+    isTextContains(login, "login")
 
-    protected Select getDropDownElement(By byLocator){
-        return new Select(getEl(byLocator));
-    }
 
-    protected WebElement getSelectedOption(By byLocator){
-        return getDropDownElement(byLocator).getFirstSelectedOption();
-    }
+    By login = by.id(login)
+    isTextContains(getEl(login), "login")
+    */
 
-    protected List<WebElement> getDropDownOptions(By byLocator){
-        return getDropDownElement(byLocator).getOptions();
-    }
-
-    protected void selectByText(By byLocator, String Text){
-        getDropDownElement(byLocator).selectByVisibleText(Text);
-    }
 
     protected Set<String> getContexts(){
         return ((SupportsContextSwitching)AppDriver.getCurrentDriver()).getContextHandles();
@@ -91,5 +98,42 @@ public class BasePage {
     protected String getCurrentContext(){
         return ((SupportsContextSwitching)AppDriver.getCurrentDriver()).getContext();
     }
+
+    private Select getDropDownElement(By byLocator) {
+        return new Select(AppDriver.getCurrentDriver().findElement(byLocator));
+    }
+    private Select getDropDownElement(WebElement el) {
+        return new Select(el);
+    }
+
+    public void selectDropDownByOption(WebElement el, String option){
+        getDropDownElement(el).selectByVisibleText(option);
+    }
+
+    protected List<WebElement> getDropDownOptions(WebElement el) {
+        return getDropDownElement(el).getOptions();
+    }
+
+    protected List<WebElement> getDropDownAllSelectedOptions(WebElement el) {
+        return getDropDownElement(el).getAllSelectedOptions();
+    }
+
+    protected WebElement getDropDownSelectedOption(WebElement el) {
+        return getDropDownElement(el).getFirstSelectedOption();
+    }
+
+    protected boolean isDropDownItemscontain(WebElement element, String text){
+        boolean flag = false;
+        List<WebElement> els = getDropDownElement(element).getOptions();
+        for(WebElement el: els){
+            if(el.getText().contains(text)){
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
+
+
 
 }
