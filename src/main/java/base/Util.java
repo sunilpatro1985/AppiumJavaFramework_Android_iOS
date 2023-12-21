@@ -4,6 +4,9 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import driver.AppDriver;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -14,6 +17,7 @@ import org.openqa.selenium.remote.RemoteWebElement;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.Base64;
 
 public class Util {
@@ -189,16 +193,20 @@ public class Util {
     }
 
     public static String convertImg_Base64(String screenshotPath) throws IOException {
-           /*File f = new File(screenshotPath);
-            FileInputStream fis = new FileInputStream(f);
-            byte[] bytes = new byte[(int)f.length()];
-            fis.read(bytes);
-            String base64Img =
-                    new String(Base64.encodeBase64(bytes), StandardCharsets.UTF_8);
-            */
-
         byte[] file = FileUtils.readFileToByteArray(new File(screenshotPath));
         String base64Img = Base64.getEncoder().encodeToString(file);
         return  base64Img;
     }
+
+    public static void tap(int x, int y) {
+        PointerInput input = new PointerInput(PointerInput.Kind.TOUCH, "finger1");
+        Sequence tap = new Sequence(input, 1);
+        tap.addAction(input.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, y));
+        tap.addAction(input.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        tap.addAction(input.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+        ((AppiumDriver) AppDriver.getCurrentDriver()).perform(Arrays.asList(tap));
+
+
+    }
+
     }
