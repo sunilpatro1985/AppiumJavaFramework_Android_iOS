@@ -4,6 +4,9 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import driver.AppDriver;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -202,6 +205,8 @@ public class Util {
         tap.addAction(input.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
         tap.addAction(input.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
         ((AppiumDriver) AppDriver.getCurrentDriver()).perform(Arrays.asList(tap));
+
+
     }
 
     }
