@@ -12,12 +12,21 @@ import org.openqa.selenium.WebElement;
 public class LoginPage extends BasePage{
 
     private By userName;
+    private By userNameErrorText;
+    private By passwordErrorText;
+    private By credentialErrorText;
 
     public LoginPage(){
         if(AppDriver.getCurrentDriver() instanceof AndroidDriver){
             userName = AppiumBy.accessibilityId("Username input field");
+            userNameErrorText = By.xpath("//android.view.ViewGroup[@content-desc='Username-error-message']/android.widget.TextView");
+            passwordErrorText = By.xpath("//android.view.ViewGroup[@content-desc='Password-error-message']/android.widget.TextView");
+            credentialErrorText = By.xpath("//android.view.ViewGroup[@content-desc='generic-error-message']/android.widget.TextView");
         }else if(AppDriver.getCurrentDriver() instanceof IOSDriver){
             userName = AppiumBy.accessibilityId("Username input field");
+            userNameErrorText = By.xpath("//XCUIElementTypeOther[@name='Username-error-message']/XCUIElementTypeStaticText");
+            passwordErrorText = By.xpath("//XCUIElementTypeOther[@name='Password-error-message']/XCUIElementTypeStaticText");
+            credentialErrorText = By.xpath("//XCUIElementTypeOther[@name='generic-error-message']/XCUIElementTypeStaticText");
         }
     }
 
@@ -33,10 +42,21 @@ public class LoginPage extends BasePage{
     public void login(String username, String password){
         //menupage.navigateToLogin();
         waitNtype(userName, username);
+        Password.clear();
         Password.sendKeys(password);
         btnLogin.click();
     }
 
+    public String getUserNameErrorText(){
+        return getText(userNameErrorText);
+    }
 
+    public String getPasswordErrorText(){
+        return getText(passwordErrorText);
+    }
+
+    public String getCredentialErrorText(){
+        return getText(credentialErrorText);
+    }
 
 }

@@ -12,7 +12,7 @@ import java.net.MalformedURLException;
 
 public class BaseTest {
 
-    @BeforeMethod
+    @BeforeClass
     public void launchApp() throws MalformedURLException {
         System.out.println("before method");
         AppFactory.launchApp();

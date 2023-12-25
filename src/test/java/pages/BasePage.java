@@ -44,7 +44,8 @@ public class BasePage {
     }
 
     protected void waitNtype(By byLocator, String text){
-        waitForEl(byLocator).sendKeys(text);
+        waitForEl(byLocator).clear();
+        getEl(byLocator).sendKeys(text);
     }
 
     protected void waitNclick(By byLocator){
