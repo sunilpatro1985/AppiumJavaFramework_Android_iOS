@@ -9,24 +9,24 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class LoginPage extends BasePage{
+public class LoginPage extends BasePage {
 
     private By userName;
     private By userNameErrorText;
     private By passwordErrorText;
-    private By credentialErrorText;
+    private By credentialsErrorText;
 
-    public LoginPage(){
-        if(AppDriver.getCurrentDriver() instanceof AndroidDriver){
+    public LoginPage() {
+        if (AppDriver.getCurrentDriver() instanceof AndroidDriver) {
             userName = AppiumBy.accessibilityId("Username input field");
             userNameErrorText = By.xpath("//android.view.ViewGroup[@content-desc='Username-error-message']/android.widget.TextView");
             passwordErrorText = By.xpath("//android.view.ViewGroup[@content-desc='Password-error-message']/android.widget.TextView");
-            credentialErrorText = By.xpath("//android.view.ViewGroup[@content-desc='generic-error-message']/android.widget.TextView");
-        }else if(AppDriver.getCurrentDriver() instanceof IOSDriver){
+            credentialsErrorText = By.xpath("//android.view.ViewGroup[@content-desc='generic-error-message']/android.widget.TextView");
+        } else if (AppDriver.getCurrentDriver() instanceof IOSDriver) {
             userName = AppiumBy.accessibilityId("Username input field");
             userNameErrorText = By.xpath("//XCUIElementTypeOther[@name='Username-error-message']/XCUIElementTypeStaticText");
             passwordErrorText = By.xpath("//XCUIElementTypeOther[@name='Password-error-message']/XCUIElementTypeStaticText");
-            credentialErrorText = By.xpath("//XCUIElementTypeOther[@name='generic-error-message']/XCUIElementTypeStaticText");
+            credentialsErrorText = By.xpath("//XCUIElementTypeOther[@name='generic-error-message']/XCUIElementTypeStaticText");
         }
     }
 
@@ -39,7 +39,7 @@ public class LoginPage extends BasePage{
     private WebElement btnLogin;
     MenuPage menupage = new MenuPage();
 
-    public void login(String username, String password){
+    public void login(String username, String password) {
         //menupage.navigateToLogin();
         waitNtype(userName, username);
         Password.clear();
@@ -47,16 +47,20 @@ public class LoginPage extends BasePage{
         btnLogin.click();
     }
 
-    public String getUserNameErrorText(){
-        return getText(userNameErrorText);
+    public String getUserNameErrorText() {
+       return getText(userNameErrorText);
     }
 
-    public String getPasswordErrorText(){
+    public String getPasswordErrorText() {
         return getText(passwordErrorText);
     }
 
-    public String getCredentialErrorText(){
-        return getText(credentialErrorText);
+    public String getCredentialsErrorText() {
+        return getText(credentialsErrorText);
     }
+
+
+
+
 
 }

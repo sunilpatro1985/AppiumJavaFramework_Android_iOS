@@ -20,36 +20,31 @@ public class LoginTest extends BaseTest {
          menupage = new MenuPage();
          loginPage = new LoginPage();
          prodPage = new ProductPage();
-
         menupage.navigateToLogin();
     }
 
-    @Test
-    public void blankUserNameTest(){
-        loginPage.login("", "1234");
-        Assert.assertEquals(loginPage.getUserNameErrorText(),"Username is required");
-    }
-    @Test
-    public void blankPasswordTest(){
-        loginPage.login("bob@example.com", "");
-        Assert.assertEquals(loginPage.getPasswordErrorText(),"Password is required");
-    }
-
-    @Test(dataProvider = "invalid-login-dataProvider")
-    public void invalidLoginTest(String userName, String password, String errorText){
-
-        loginPage.login(userName, password);
-        Assert.assertEquals(loginPage.getCredentialErrorText(),errorText);
-    }
-    @Test
+    @Test(priority = 4)
     public void validLoginTest(){
-            MenuPage menupage = new MenuPage();
-            LoginPage loginPage = new LoginPage();
-            ProductPage prodPage = new ProductPage();
-
-            menupage.navigateToLogin();
             loginPage.login("bob@example.com", "10203040");
             Assert.assertTrue(prodPage.waitForProductText());
+    }
+
+    @Test(priority = 1)
+    public void invalidLogin_emptyUserNameTest(){
+        loginPage.login("", "10203040");
+        Assert.assertEquals(loginPage.getUserNameErrorText(), "Username is required");
+    }
+
+    @Test(priority = 2)
+    public void invalidLogin_emptyPasswordTest(){
+        loginPage.login("bob@example.com", "");
+        Assert.assertEquals(loginPage.getPasswordErrorText(), "Password is required");
+    }
+
+    @Test(dataProvider = "invalid-login-dataProvider", priority = 3)
+    public void invalidLogin_Test(String uName, String password, String errorText){
+        loginPage.login(uName, password);
+        Assert.assertEquals(loginPage.getCredentialsErrorText(), errorText);
     }
 
     @DataProvider(name = "invalid-login-dataProvider")
@@ -59,7 +54,9 @@ public class LoginTest extends BaseTest {
         //and put it into this array variable
         Object object[][] = { { "bob@example.com", "1234" ,"Provided credentials do not match any user in this service."},
                               { "bob@example", "10203040", "Provided credentials do not match any user in this service." },
-                            };
+        };
         return object;
     }
+
+
 }

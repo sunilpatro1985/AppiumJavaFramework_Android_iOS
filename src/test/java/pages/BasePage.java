@@ -2,6 +2,7 @@ package pages;
 
 import driver.AppDriver;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.remote.SupportsContextSwitching;
 import org.openqa.selenium.By;
@@ -44,8 +45,9 @@ public class BasePage {
     }
 
     protected void waitNtype(By byLocator, String text){
-        waitForEl(byLocator).clear();
-        getEl(byLocator).sendKeys(text);
+        waitForEl(byLocator);
+        getEl(byLocator).clear();
+                getEl(byLocator).sendKeys(text);
     }
 
     protected void waitNclick(By byLocator){
@@ -61,7 +63,13 @@ public class BasePage {
     }
 
     protected String getText(By byLocator){
-        return waitForEl(byLocator).getText();
+        String str = "";
+        if (AppDriver.getCurrentDriver() instanceof AndroidDriver) {
+            str = getEl(byLocator).getText();
+        } else if (AppDriver.getCurrentDriver() instanceof IOSDriver) {
+            str =  getAttribute(byLocator, "value");
+        }
+        return str;
     }
 
     protected String getAttribute(By byLocator, String attr){
