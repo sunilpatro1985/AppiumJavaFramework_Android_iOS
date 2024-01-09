@@ -7,6 +7,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
+import io.appium.java_client.ios.IOSDriver;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -19,6 +20,9 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Util {
     static double SCROLL_RATIO = 0.5;
@@ -45,9 +49,36 @@ public class Util {
                 scroll(ScrollDirection.DOWN, Util.SCROLL_RATIO);
                 Thread.sleep(1000);
             }
-
         }
+    }
 
+    public static Set<WebElement> getItems(By listItems) throws InterruptedException {
+        String prevPageSource = "";
+        Set<WebElement> items = new HashSet<WebElement>();
+
+        if(AppDriver.getCurrentDriver() instanceof AndroidDriver){
+            while (!isEndOfPage(prevPageSource)) {
+                prevPageSource = AppDriver.getCurrentDriver().getPageSource();
+
+                for (WebElement el : AppDriver.getCurrentDriver().findElements(listItems)) {
+                    items.add(el);
+                }
+                scroll(ScrollDirection.DOWN, Util.SCROLL_RATIO);
+                Thread.sleep(500);
+            }
+        }else if(AppDriver.getCurrentDriver() instanceof IOSDriver){
+            items = AppDriver.getCurrentDriver().findElements(listItems).stream().collect(Collectors.toSet());
+        }
+        return items;
+    }
+
+    public static void scrollToTop() throws InterruptedException {
+        String prevPageSource = "";
+        while (!isEndOfPage(prevPageSource)) {
+            prevPageSource = AppDriver.getCurrentDriver().getPageSource();
+            scroll(ScrollDirection.UP, Util.SCROLL_RATIO);
+            Thread.sleep(1000);
+        }
     }
 
     public static void scrollNclick(By byEl) {
