@@ -1,25 +1,23 @@
 package tests;
 
 import base.BaseTest;
-import driver.AppDriver;
-import io.appium.java_client.android.AndroidDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.MenuPage;
-import pages.ProductPage;
+import pages.ProductsPage;
 
 public class LoginTest extends BaseTest {
     MenuPage menupage;
     LoginPage loginPage;
-    ProductPage prodPage;
+    ProductsPage prodPage;
     @BeforeClass
     public void setup(){
          menupage = new MenuPage();
          loginPage = new LoginPage();
-         prodPage = new ProductPage();
+         prodPage = new ProductsPage();
         menupage.navigateToLogin();
     }
 
