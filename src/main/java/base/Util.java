@@ -28,26 +28,6 @@ public class Util {
     static double SCROLL_RATIO = 0.5;
     static Duration SCROLL_DUR = Duration.ofMillis(500);
 
-    public static Set<WebElement> getItems(By listItems) throws InterruptedException {
-        String prevPageSource = "";
-        Set<WebElement> items = new HashSet<WebElement>();
-
-        if(AppDriver.getCurrentDriver() instanceof AndroidDriver){
-            while (!isEndOfPage(prevPageSource)) {
-                prevPageSource = AppDriver.getCurrentDriver().getPageSource();
-                for (WebElement el : AppDriver.getCurrentDriver().findElements(listItems)) {
-                    items.add(el);
-                }
-                scroll(ScrollDirection.DOWN, Util.SCROLL_RATIO);
-                Thread.sleep(1000);
-            }
-            Util.scrollToTop();
-        }else if(AppDriver.getCurrentDriver() instanceof IOSDriver){
-            items = AppDriver.getCurrentDriver().findElements(listItems).stream().collect(Collectors.toSet());
-        }
-        return items;
-    }
-
     public static void scrollToTop() throws InterruptedException {
         String prevPageSource = "";
         while (!isEndOfPage(prevPageSource)) {
@@ -118,15 +98,6 @@ public class Util {
             items = AppDriver.getCurrentDriver().findElements(listItems).stream().collect(Collectors.toSet());
         }
         return items;
-    }
-
-    public static void scrollToTop() throws InterruptedException {
-        String prevPageSource = "";
-        while (!isEndOfPage(prevPageSource)) {
-            prevPageSource = AppDriver.getCurrentDriver().getPageSource();
-            scroll(ScrollDirection.UP, Util.SCROLL_RATIO);
-            Thread.sleep(1000);
-        }
     }
 
     public static void scrollNclick(By byEl) {
