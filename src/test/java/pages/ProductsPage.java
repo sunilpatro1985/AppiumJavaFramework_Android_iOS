@@ -7,6 +7,8 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.By;
 
+import java.util.List;
+
 public class ProductsPage extends BasePage{
 
     //@AndroidFindBy
@@ -50,13 +52,31 @@ public class ProductsPage extends BasePage{
     public int getItemsCount() throws InterruptedException {
         int count = Util.getItems(itemNames).size();
         System.out.println(count);
-        Util.scrollToTop();
+        //Util.scrollToTop();
         return count;
     }
 
     public void sortBy(){
         waitNclick(sortByOption);
         waitNclick(nameAsc);
+    }
+
+    public void selectSort(String sortOption){
+        waitNclick(sortByOption);
+        switch (sortOption){
+            case "nameAsc":
+                waitNclick(nameAsc);
+                break;
+            case "nameDesc":
+                waitNclick(nameDesc);
+                break;
+            case "priceAsc":
+                waitNclick(priceAsc);
+                break;
+            case "priceDesc":
+                waitNclick(priceDesc);
+                break;
+        }
     }
 
 }

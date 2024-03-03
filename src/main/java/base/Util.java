@@ -94,6 +94,7 @@ public class Util {
                 scroll(ScrollDirection.DOWN, Util.SCROLL_RATIO);
                 Thread.sleep(500);
             }
+            Util.scrollToTop();
         }else if(AppDriver.getCurrentDriver() instanceof IOSDriver){
             items = AppDriver.getCurrentDriver().findElements(listItems).stream().collect(Collectors.toSet());
         }

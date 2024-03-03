@@ -22,7 +22,7 @@ public class ExcelReader {
     private String excelFilePath;
     private Map<String, Integer> columns = new HashMap<>();
 
-    public void setExcelFile(String ExcelPath, String SheetName) throws Exception {
+    public ExcelReader setExcelFile(String ExcelPath, String SheetName) throws Exception {
         try {
             File fis = new File(ExcelPath);
             wb = WorkbookFactory.create(fis);
@@ -41,6 +41,7 @@ public class ExcelReader {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return this;
     }
 
     public String getCellData(int rownum, int colnum) throws Exception {
@@ -82,7 +83,7 @@ public class ExcelReader {
         System.out.println(excel.getCellData("email", 1));
         System.out.println(excel.getCellData("telephone", 1));*/
         //excel.getCellData(1,1);
-        excel.setExcelFile("./testData.xlsx", "products");
+        excel.setExcelFile("./testData.xlsx", "proddsort");
         Object obj[][] = excel.to2DArray();
 
         //excel.setExcelFile("./testData.xlsx", "Sheet1");
