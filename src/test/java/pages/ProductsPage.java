@@ -21,6 +21,7 @@ public class ProductsPage extends BasePage{
     private By first_itemPrice;
 
     public By footer = By.xpath("//XCUIElementTypeStaticText[@name='© 2024 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy.']");
+    public By fifthItem = AppiumBy.xpath("(//XCUIElementTypeStaticText[@name='store item text'])[6]");
 
     public ProductsPage(){
         if(AppDriver.getCurrentDriver() instanceof AndroidDriver){
@@ -50,13 +51,28 @@ public class ProductsPage extends BasePage{
     public int getItemsCount() throws InterruptedException {
         int count = Util.getItems(itemNames).size();
         System.out.println(count);
-        Util.scrollToTop();
+        //Util.scrollToTop();
         return count;
     }
 
-    public void sortBy(){
+    public void sortBy(String sortOption){
         waitNclick(sortByOption);
-        waitNclick(nameAsc);
+        switch (sortOption){
+            case "nameAsc":
+                waitNclick(nameAsc);
+                break;
+            case "nameDesc":
+                waitNclick(nameDesc);
+                break;
+            case "priceAsc":
+                waitNclick(priceAsc);
+                break;
+            case "priceDesc":
+                waitNclick(priceDesc);
+                break;
+        }
+        /*waitNclick(sortByOption);
+        waitNclick(nameAsc);*/
     }
 
 }

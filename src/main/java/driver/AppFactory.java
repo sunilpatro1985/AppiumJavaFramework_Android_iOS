@@ -29,8 +29,8 @@ public class AppFactory {
 
     private static void ios_launchApp() throws MalformedURLException, MalformedURLException {
         XCUITestOptions options = new XCUITestOptions();
-        options.setDeviceName("iPhone 14")
-                .setPlatformVersion("16.2")
+        options.setDeviceName("iPhone 15")
+                .setPlatformVersion("17.2")
                 .setBundleId("com.saucelabs.mydemoapp.rn");
         driver = new IOSDriver(new URL("http://127.0.0.1:4723/"), options);
         AppDriver.setDriver(driver);
