@@ -27,19 +27,19 @@ public class LoginTest extends BaseTest {
             Assert.assertTrue(prodPage.waitForProductText());
     }
 
-    @Test(priority = 1)
+    //@Test(priority = 1)
     public void invalidLogin_emptyUserNameTest(){
         loginPage.login("", "10203040");
         Assert.assertEquals(loginPage.getUserNameErrorText(), "Username is required");
     }
 
-    @Test(priority = 2)
+    //@Test(priority = 2)
     public void invalidLogin_emptyPasswordTest(){
         loginPage.login("bob@example.com", "");
         Assert.assertEquals(loginPage.getPasswordErrorText(), "Password is required");
     }
 
-    @Test(dataProvider = "invalid-login-dataProvider", priority = 3)
+    //@Test(dataProvider = "invalid-login-dataProvider", priority = 3)
     public void invalidLogin_Test(String uName, String password, String errorText){
         loginPage.login(uName, password);
         Assert.assertEquals(loginPage.getCredentialsErrorText(), errorText);

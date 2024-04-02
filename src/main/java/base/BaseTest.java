@@ -31,7 +31,7 @@ public class BaseTest {
     @BeforeSuite
     public void serverStart(){
         System.out.println("before suite");
-        base.AppiumServer.start();
+        //base.AppiumServer.start();
     }
 
     @AfterSuite
