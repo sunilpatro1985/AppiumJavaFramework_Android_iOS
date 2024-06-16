@@ -31,7 +31,9 @@ public class BaseTest {
     @BeforeSuite
     public void serverStart(){
         System.out.println("before suite");
-        base.AppiumServer.start();
+        if(AppData.isCloud.contains("false")){
+            base.AppiumServer.start();
+        }
     }
 
     @AfterSuite

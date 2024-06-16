@@ -1,0 +1,16 @@
+userName: sunilpatro1
+accessKey: DnNLxup5pnCdArXtxkiX
+framework: testng
+app: bs://22aa9fadc1e95af6304472c4e1bdf437e0bd10f3
+platforms:
+  - platformName: ios
+    deviceName: iPhone 14 Pro Max
+    platformVersion: 16
+  - platformName: ios
+    deviceName: iPhone XS
+    platformVersion: 15
+parallelsPerPlatform: 1
+browserstackLocal: true
+buildName: browserstack-build-1
+projectName: BrowserStack Sample
+debug: false
